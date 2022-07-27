@@ -6,10 +6,10 @@ from tkinter import messagebox
 
 class Method:
     @classmethod
-    def test(self):
+    def test(cls):
         return {'4001':'あ', '5001':'い', '123':'う', '1224':'え'}
     @classmethod
-    def read_pkl(self):
+    def read_pkl(cls):
         file = glob.glob('*.pkl')[0]
         df = pd.read_pickle(file)
         return dict(zip(df[df.columns[0]],df[df.columns[1]]))
