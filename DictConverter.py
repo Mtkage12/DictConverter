@@ -17,9 +17,9 @@ class Method:
 class Dic:
     def __init__(self):
         # テスト環境
-        self.dic = Method.test()
+        # self.dic = Method.test()
         # 本番環境
-        # self.dic = Method.read_pkl('XXXXXX.pkl')
+        self.dic = Method.read_pkl()
 
 def main():
     # 辞書データの読み込み
