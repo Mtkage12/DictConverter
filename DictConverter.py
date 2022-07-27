@@ -1,3 +1,5 @@
+import os
+import glob
 import pandas as pd
 import pyperclip as pp
 from tkinter import messagebox
@@ -7,7 +9,8 @@ class Method:
     def test(self):
         return {'4001':'あ', '5001':'い', '123':'う', '1224':'え'}
     @classmethod
-    def read_pkl(self, file):
+    def read_pkl(self):
+        file = glob.glob('*.pkl')[0]
         df = pd.read_pickle(file)
         return dict(zip(df[df.columns[0]],df[df.columns[1]]))
     
@@ -38,5 +41,6 @@ def main():
     messagebox.showinfo('完了', 'クリップボードにコピーしました')
 
 if __name__ == '__main__':
+    os.chdir(os.getcwd())
     main()
     
