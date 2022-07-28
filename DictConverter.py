@@ -1,6 +1,5 @@
 import os
 import sys
-from matplotlib.pyplot import flag
 import pandas as pd
 import pyperclip as pp
 from pathlib import Path
@@ -33,7 +32,6 @@ class Arg:
 
 class Engine:
     def __init__(self):
-        # テスト環境
         arg = Arg()
         self.dic = arg.dic
         self.alert_msg = arg.alert_msg
@@ -64,7 +62,7 @@ def main():
     pp.copy(word+'\n')
     
     # メッセージを表示
-    # messagebox.showinfo('完了', 'クリップボードにコピーしました')
+    messagebox.showinfo('完了', 'クリップボードにコピーしました')
 
 if __name__ == '__main__':
     os.chdir(os.getcwd())
