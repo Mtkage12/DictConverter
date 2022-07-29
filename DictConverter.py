@@ -5,9 +5,9 @@ import pyperclip as pp
 from pathlib import Path
 from tkinter import messagebox
 
-class Arg:
-    def __init__(self) -> None:
-        self.target_file = sys.argv[-1]
+class Argv:
+    def __init__(self, argv) -> None:
+        self.target_file = argv
         self.dic = {}
         self.alert_msg = ""
         self.flag = False
@@ -30,18 +30,58 @@ class Arg:
         df = pd.read_csv(self.target_file, encoding='cp932', header=None, dtype=str)
         self.dic = dict(zip(df[df.columns[0]],df[df.columns[1]]))
 
+class Argvs:
+    books = []
+    flags = False
+    dics= {}
+    def __init__(self) -> None:
+        print(sys.argv)
+        if len(sys.argv) > 1:
+            for idx in range(1,len(sys.argv)):
+                print(sys.argv[idx])
+                Argvs.books(Argv(sys.argv[idx]))
+        else:
+            Argvs.books.append(Argv(sys.argv[-1]))
+        self.merge_dict()
+        self.merge_flags()
+        
+    def merge_flags(self):
+        flags = [book.flag for book in Argvs.books]
+        if True in flags:
+            Argvs.flags = True 
+        else:
+            pass
+
+    def merge_dict(self):
+        buf_dic = {}
+        for book in Argvs.books:
+            buf_dic.update(book.dic)
+        Argvs.dics = buf_dic
+
 class Engine:
     def __init__(self):
-        arg = Arg()
-        self.dic = arg.dic
-        self.alert_msg = arg.alert_msg
-        self.flag = arg.flag
+        argv = Argv(sys.argv[-1])
+        self.dic = argv.dic
+        self.alert_msg = argv.alert_msg
+        self.flag = argv.flag
+
+class Switch_Engine:
+    def __init__(self):
+        argvs = Argvs()
+        print(argvs.dics)
+        self.dic = argvs.dics
+        self.flag = argvs.flags
         
 def main():
-    # D＆Dファイルがpklファイル、csvファイル以外なら処理中止
+    # D&Dファイルが単一
     engine = Engine()
+    
+    # D&Dファイルが複数
+    # engine = Switch_Engine()
+    
+    # D＆Dファイルがpklファイル、csvファイル以外なら処理中止
     if engine.flag==True:
-        messagebox.showinfo('中止', engine.alert_msg)
+        messagebox.showinfo('中止', '想定外のエラー')
         sys.exit()
     else:
         pass
