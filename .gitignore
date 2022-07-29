@@ -1,0 +1,8 @@
+# untracking
+*/
+*
+
+# tracking
+!.gitignore
+!DictConverter.py
+!README.md
