@@ -31,6 +31,7 @@ class Argv:
         self.dic = dict(zip(df[df.columns[0]],df[df.columns[1]]))
 
 class Argvs:
+    # Argvをまとめたクラス
     books = []
     flags = False
     dics= {}
@@ -59,6 +60,7 @@ class Argvs:
         Argvs.dics = buf_dic
 
 class Engine:
+    # 単一想定用取り込みクラス
     def __init__(self):
         argv = Argv(sys.argv[-1])
         self.dic = argv.dic
@@ -66,6 +68,7 @@ class Engine:
         self.flag = argv.flag
 
 class Switch_Engine:
+    # 複数想定用取り込みクラス
     def __init__(self):
         argvs = Argvs()
         print(argvs.dics)
